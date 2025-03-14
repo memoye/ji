@@ -1,0 +1,19 @@
+---
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Jessica Iwuala",
+  url: "https://yourdomain.com",
+  sameAs: [
+    "https://instagram.com/jessicaiwuala",
+    "https://tiktok.com/@jessicaiwuala",
+    "https://linkedin.com/in/jessicaiwuala",
+  ],
+  jobTitle: "Digital Creator",
+  description:
+    "Digital creator and model specializing in fashion, beauty, and lifestyle content creation.",
+  image: "/social-image.jpg",
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />

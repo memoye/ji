@@ -1,0 +1,143 @@
+---
+import { Image } from "astro:assets";
+import aboutImage from "../assets/images/profile.jpeg";
+---
+
+<section id="about" class="relative py-24 bg-gray-900 text-white about">
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Image Column -->
+      <div class="relative group" data-animate>
+        <figure
+          class="relative aspect-[4/5] overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/10"
+        >
+          <Image
+            src={aboutImage}
+            alt="Jessica Iwuala - Digital Creator and Model"
+            class="h-full w-full object-cover object-center"
+            width={600}
+            height={750}
+          />
+        </figure>
+      </div>
+
+      <!-- Content Column -->
+      <div class="space-y-8">
+        <div class="space-y-4" data-animate>
+          <h2
+            class="text-4xl font-bold tracking-tight text-balance bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400"
+          >
+            About Me
+          </h2>
+          <div
+            class="h-1 w-20 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full"
+          >
+          </div>
+        </div>
+
+        <div class="space-y-4 text-gray-300">
+          <p class="text-lg leading-relaxed" data-animate>
+            Hi there! I'm Jessica Iwuala, a digital creator and model passionate
+            about creating authentic content that resonates and inspires. With a
+            background in fashion and beauty, I've developed a keen eye for
+            aesthetics and storytelling.
+          </p>
+
+          <p class="text-lg leading-relaxed" data-animate>
+            My journey in content creation began with a simple desire to share
+            my love for fashion and beauty. Today, I work with brands to create
+            engaging content that connects with audiences authentically.
+          </p>
+
+          <ul class="grid grid-cols-2 gap-4 pt-6">
+            <li class="flex items-center gap-2" data-animate>
+              <svg
+                class="w-5 h-5 text-pink-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Content Creation</span>
+            </li>
+            <li class="flex items-center gap-2" data-animate>
+              <svg
+                class="w-5 h-5 text-pink-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Brand Collaboration</span>
+            </li>
+            <li class="flex items-center gap-2" data-animate>
+              <svg
+                class="w-5 h-5 text-pink-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Fashion Modeling</span>
+            </li>
+            <li class="flex items-center gap-2" data-animate>
+              <svg
+                class="w-5 h-5 text-pink-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Social Media</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pt-6" data-animate>
+          <button
+            class="group inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:from-purple-500 hover:to-pink-500 transition-all duration-300"
+          >
+            <span>View Portfolio</span>
+            <svg
+              class="w-4 h-4 transition-transform group-hover:translate-x-1"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14m-7-7 7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  }
+</style>

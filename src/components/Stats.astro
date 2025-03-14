@@ -1,0 +1,123 @@
+---
+const stats = [
+  {
+    label: "Content Reach",
+    value: "10K+",
+    sublabel: "Monthly Views",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+    </svg>`,
+  },
+  {
+    label: "Portfolio Projects",
+    value: "15+",
+    sublabel: "Completed Works",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>`,
+  },
+  {
+    label: "Engagement Rate",
+    value: "4.2%",
+    sublabel: "Average",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+    </svg>`,
+  },
+  {
+    label: "Social Growth",
+    value: "25%",
+    sublabel: "Monthly Increase",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+    </svg>`,
+  },
+];
+---
+
+<section class="py-24 bg-gray-900">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="border-t border-b border-gray-800 py-12">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 items-center"
+      >
+        {
+          stats.map((stat) => (
+            <div class="flex items-center gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-pink-500/10 text-pink-400">
+                <Fragment set:html={stat.icon} />
+              </div>
+              <div>
+                <div class="flex items-baseline gap-1">
+                  <div
+                    class="text-3xl font-bold text-white"
+                    data-value={stat.value}
+                  >
+                    0
+                  </div>
+                </div>
+                <div class="text-sm font-medium text-gray-300">
+                  {stat.label}
+                </div>
+                <div class="text-sm text-gray-500">{stat.sublabel}</div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function animateValue(
+    element: HTMLElement,
+    start: number,
+    end: string,
+    duration: number
+  ) {
+    const endValue = parseInt(end);
+    const range = endValue - start;
+    const increment = range / (duration / 16);
+    let current = start;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= endValue) {
+        element.textContent = end;
+        clearInterval(timer);
+      } else {
+        element.textContent = Math.floor(current).toString() + "+";
+      }
+    }, 16);
+  }
+
+  function isElementInViewport(el: Element) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const element = entry.target as HTMLElement;
+        const value = element.dataset.value;
+        if (value) {
+          animateValue(element, 0, value.replace("+", ""), 2000);
+        }
+        observer.unobserve(element);
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-value]").forEach((element) => {
+    observer.observe(element);
+  });
+</script>

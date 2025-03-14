@@ -1,0 +1,164 @@
+---
+import { Image } from "astro:assets";
+
+interface ContentItem {
+  title: string;
+  platform: "Instagram" | "TikTok" | "Reels";
+  thumbnail: string;
+  description: string;
+  metrics: string;
+  link: string;
+}
+
+const portfolio: ContentItem[] = [
+  {
+    title: "The Summer Fashion Trend",
+    platform: "Instagram",
+    thumbnail: "/portfolio/igpost.jpg",
+    description: "...",
+    metrics: "10K+ views",
+    link: "https://www.instagram.com/you_jaymharah/reel/DFlaG8SCMg_",
+  },
+
+  {
+    title: "Nail Artistry",
+    platform: "TikTok",
+    thumbnail: "/portfolio/nails.avif",
+    description: "This video might make you book a nail appointment ASAP",
+    metrics: "500+ likes in 24h",
+    link: "https://www.tiktok.com/@you.jaymharah/video/7468424377630067990",
+  },
+  {
+    title: "The Summer Fashion Trend",
+    platform: "Instagram",
+    thumbnail: "/portfolio/june.jpg",
+    description: "This gorgeous dress is the perfect June dress",
+    metrics: "10K+ views",
+    link: "https://www.instagram.com/youjaymharah_trends/reel/DGVgCKztbk3",
+  },
+  {
+    title: "Church Service",
+    platform: "TikTok",
+    thumbnail: "/portfolio/church.avif",
+    description: "Who else can relate? Me right after church service. ...",
+    metrics: "50+ likes in 24h",
+    link: "https://www.tiktok.com/@you.jaymharah/video/7475108010734505238",
+  },
+  {
+    title: "Sunday Transition",
+    platform: "Instagram",
+    thumbnail: "/portfolio/rich_aunt.jpg",
+    description:
+      "It's Rich Auntie Season and I'm basking in it Bubu gown: @youjaymharah_trends",
+    metrics: "10K+ views",
+    link: "https://www.instagram.com/you_jaymharah/reel/DGJofgJoCTj/",
+  },
+  // Add more items here
+];
+
+const platforms = ["All", "Instagram", "TikTok", "Reels"];
+---
+
+<section id="portfolio" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center space-y-6 mb-12">
+      <h2
+        class="text-4xl font-bold tracking-tight text-balance bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"
+      >
+        My Work: Creativity Meets Strategy
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        A showcase of my best performing content across social media platforms.
+      </p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div
+      class="flex justify-center gap-2 mb-12 flex-wrap"
+      id="portfolio-filters"
+    >
+      {
+        platforms.map((platform) => (
+          <button
+            class="px-4 py-2 text-sm font-medium rounded-full transition-all data-[active=true]:bg-gradient-to-r data-[active=true]:from-pink-500 data-[active=true]:to-purple-500 data-[active=true]:text-white bg-gray-100 text-gray-700 hover:bg-gray-200"
+            data-platform={platform}
+            data-active={platform === "All"}
+            data-animate
+          >
+            {platform}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      id="portfolio-grid"
+    >
+      {
+        portfolio.map((item) => (
+          <div
+            class="group relative overflow-hidden rounded-xl bg-gray-100 portfolio-item"
+            data-platform={item.platform}
+          >
+            <a href={item.link} target="_blank" rel="noopener noreferrer">
+              <figure class="aspect-[4/5] relative">
+                <Image
+                  src={item.thumbnail}
+                  alt={item.title}
+                  class="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                  width={540}
+                  height={720}
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent md:opacity-0 md:group-hover:opacity-100 transition-all duration-300">
+                  <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class="text-xs font-medium px-2 py-1 rounded-full bg-pink-500/20 text-pink-200">
+                        {item.platform}
+                      </span>
+                      <span class="text-xs text-gray-300">{item.metrics}</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-1">{item.title}</h3>
+                    <p class="text-sm text-gray-200">{item.description}</p>
+                  </div>
+                </div>
+              </figure>
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const filterButtons = document.querySelectorAll("#portfolio-filters button");
+  const portfolioItems = document.querySelectorAll(".portfolio-item");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const platform = button.getAttribute("data-platform");
+
+      // Update active state of buttons
+      filterButtons.forEach((btn) => btn.setAttribute("data-active", "false"));
+      button.setAttribute("data-active", "true");
+
+      // Filter items
+      portfolioItems.forEach((item) => {
+        const itemPlatform = item.getAttribute("data-platform");
+        const shouldShow = platform === "All" || platform === itemPlatform;
+
+        item.style.opacity = shouldShow ? "1" : "0";
+        item.style.transform = shouldShow ? "scale(1)" : "scale(0.8)";
+        setTimeout(
+          () => {
+            item.style.display = shouldShow ? "block" : "none";
+          },
+          shouldShow ? 0 : 300
+        );
+      });
+    });
+  });
+</script>

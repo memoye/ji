@@ -1,0 +1,188 @@
+<header class="sticky top-0 z-50 h-18 backdrop-blur-2xl bg-white/20">
+  <nav
+    class="flex items-center justify-between p-6 md:px-8"
+    aria-label="Global"
+  >
+    <div class="flex gap-4 items-center md:flex-1">
+      <a href="#" class="-m-1.5 p-1.5">
+        <span class="sr-only">@jessicaiwuala on instagram</span>
+        <img
+          class="size-5 w-auto"
+          src="/icons/ig.png"
+          alt="@jessicaiwuala on instagram"
+        />
+      </a>
+
+      <a href="#" class="-m-1.5 p-1.5">
+        <span class="sr-only">@jessicaiwuala on tiktok</span>
+        <img
+          class="size-5 w-auto"
+          src="/icons/tt.png"
+          alt="@jessicaiwuala on tiktok"
+        />
+      </a>
+
+      <a href="#" class="-m-1.5 p-1.5">
+        <span class="sr-only">Jessica Iwuala on LinkedIn</span>
+        <img
+          class="size-5 w-auto"
+          src="/icons/in.png"
+          alt="@jessicaiwuala on instagram"
+        />
+      </a>
+
+      <a
+        aria-label="@jessicaiwuala on X (twitter)"
+        rel="noopener noreferrer"
+        href="https://x.com/yourusername"
+        class="-m-1.5 p-1.5"
+        target="_blank"
+      >
+        <span class="sr-only">@jessicaiwuala on X (twitter)</span>
+        <img class="size-5 w-auto" src="/icons/x.png" alt="X (twitter) Logo" />
+      </a>
+    </div>
+
+    <!-- Replace the login div with navigation -->
+    <div class="hidden md:flex items-center gap-8">
+      <a
+        href="#about"
+        class="text-sm font-medium text-gray-700 hover:text-pink-500 transition-colors"
+      >
+        About
+      </a>
+      <a
+        href="#portfolio"
+        class="text-sm font-medium text-gray-700 hover:text-pink-500 transition-colors"
+      >
+        Portfolio
+      </a>
+      <a
+        href="#resume"
+        class="text-sm font-medium text-gray-700 hover:text-pink-500 transition-colors"
+      >
+        Resume
+      </a>
+      <button
+        onclick="togglecontactModal()"
+        class="text-sm font-medium px-4 py-2 rounded-full text-white bg-gradient-to-r from-pink-500 to-purple-500 hover:from-purple-500 hover:to-pink-500 transition-all"
+      >
+        Contact
+      </button>
+    </div>
+
+    <!-- Mobile menu button -->
+    <div class="md:hidden">
+      <button
+        type="button"
+        class="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+        aria-expanded="false"
+        id="mobile-menu-button"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu, show/hide based on menu state -->
+  <div class="hidden md:hidden" id="mobile-menu">
+    <div class="space-y-1 px-4 pb-3 pt-2">
+      <a
+        href="#about"
+        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-pink-500"
+      >
+        About
+      </a>
+      <a
+        href="#portfolio"
+        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-pink-500"
+      >
+        Portfolio
+      </a>
+      <a
+        href="#resume"
+        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-pink-500"
+      >
+        Resume
+      </a>
+      <button
+        onclick="togglecontactModal()"
+        class="w-full text-left rounded-lg px-3 py-2 text-base font-medium text-pink-500 hover:bg-gray-50"
+      >
+        Contact
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  // Smooth scroll function
+  function smoothScroll(e: Event) {
+    e.preventDefault();
+    const link = e.currentTarget as HTMLAnchorElement;
+    const targetId = link.getAttribute("href");
+    if (!targetId || !targetId.startsWith("#")) return;
+
+    const targetElement = document.querySelector(targetId);
+    if (!targetElement) return;
+
+    const headerOffset = 80; // Adjust based on your header height
+    const elementPosition = targetElement.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+  }
+
+  // Add smooth scroll to all navigation links
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", smoothScroll);
+  });
+
+  // Mobile menu logic
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener("click", () => {
+      const expanded =
+        mobileMenuButton.getAttribute("aria-expanded") === "true";
+      mobileMenuButton.setAttribute("aria-expanded", String(!expanded));
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    // Close mobile menu when clicking a link
+    mobileMenu.querySelectorAll("a, button").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        !mobileMenu.contains(e.target as Node) &&
+        !mobileMenuButton.contains(e.target as Node)
+      ) {
+        mobileMenu.classList.add("hidden");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+</script>

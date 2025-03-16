@@ -15,7 +15,7 @@ interface Props {
 const {
   title = "Jessica Iwuala - Digital Creator & Model | Fashion & Lifestyle Content",
   description = "Lagos-based digital creator and model crafting authentic fashion & lifestyle content. Turning brand stories into engaging social media moments.",
-  image = "https://iwualajessica.vercel.app/portfolio/about.jpg",
+  // image = "",
 } = Astro.props;
 
 // Add fallback for when Astro.site is undefined
@@ -46,7 +46,10 @@ const canonicalURL = Astro.site
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta
+      property="og:image"
+      content="https://iwualajessica.vercel.app/portfolio/about.jpg"
+    />
     <meta
       property="og:site_name"
       content="Jessica Iwuala - Digital Creator & Model"

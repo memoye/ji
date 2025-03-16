@@ -1,5 +1,6 @@
 export function setupAnimations() {
-  const animatedElements = document.querySelectorAll("[data-animate]");
+  const animatedElements =
+    document.querySelectorAll<HTMLElement>("[data-animate]");
 
   const observer = new IntersectionObserver(
     (entries) => {

@@ -6,11 +6,27 @@ interface ContentItem {
   platform: "Instagram" | "TikTok" | "Reels";
   thumbnail: string;
   description: string;
-  metrics: string;
+  metrics?: string;
   link: string;
 }
 
 const portfolio: ContentItem[] = [
+  {
+    title: "Fresh Braids, New Mood",
+    platform: "Instagram",
+    thumbnail: "/portfolio/braids_mood.jpg",
+    description:
+      "Nobody talks enough about how getting new braids instantly changes your mood.",
+    link: "https://www.instagram.com/reel/DZIsyQrIZTC/",
+  },
+  {
+    title: "Soft Glam Transition",
+    platform: "Instagram",
+    thumbnail: "/portfolio/makeup_transition.jpg",
+    description:
+      "Wanted a quick makeup transition, ended up serving soft glam — no crumbs left.",
+    link: "https://www.instagram.com/reel/DYmaShvoTGm/",
+  },
   {
     title: "Hair Styling",
     platform: "TikTok",
@@ -20,12 +36,35 @@ const portfolio: ContentItem[] = [
     link: "https://vm.tiktok.com/ZNdd5hrwF",
   },
   {
+    title: "Braids Maintenance",
+    platform: "Instagram",
+    thumbnail: "/portfolio/braids_maintenance.jpg",
+    description:
+      "Braids are cute, but maintenance is key — caring for your hair is just as important as styling it.",
+    link: "https://www.instagram.com/reel/DX2qlETIMbR/",
+  },
+  {
+    title: "Leg Day Grind",
+    platform: "Instagram",
+    thumbnail: "/portfolio/leg_day.jpg",
+    description:
+      "Worth it! Leg day three times a week — what are you training legs for?",
+    link: "https://www.instagram.com/reel/DZLhI8Ro83l/",
+  },
+  {
     title: "Nail Artistry",
     platform: "TikTok",
     thumbnail: "/portfolio/nails.avif",
     description: "This video might make you book a nail appointment ASAP",
     metrics: "500+ likes in 24h",
     link: "https://www.tiktok.com/@you.jaymharah/video/7468424377630067990",
+  },
+  {
+    title: "Self-Care Reset",
+    platform: "Instagram",
+    thumbnail: "/portfolio/self_care_reset.jpg",
+    description: "A quiet self-care moment to reset and recharge.",
+    link: "https://www.instagram.com/reel/DXzEjtAo6N8/",
   },
   {
     title: "The Summer Fashion Trend",
@@ -60,6 +99,38 @@ const portfolio: ContentItem[] = [
     metrics: "10K+ views",
     link: "https://www.instagram.com/you_jaymharah/reel/DGJofgJoCTj/",
   },
+  {
+    title: "Little Luxuries",
+    platform: "Instagram",
+    thumbnail: "/portfolio/little_luxuries.jpg",
+    description:
+      "Sometimes it's okay to buy something simply because it makes your life a little better.",
+    link: "https://www.instagram.com/reel/DZu6FMZIeRW/",
+  },
+  {
+    title: "Pack My Gym Bag",
+    platform: "Instagram",
+    thumbnail: "/portfolio/gym_bag.jpg",
+    description:
+      "My gym bag essentials — from grip gloves and headphones to my gym journal and water bottle.",
+    link: "https://www.instagram.com/reel/DZxB3S0IV5e/",
+  },
+  {
+    title: "Thanksgiving Sunday",
+    platform: "Instagram",
+    thumbnail: "/portfolio/thanksgiving_sunday.jpg",
+    description:
+      "I will dance and rejoice as I enter the Lord's house. It's Thanksgiving Sundayyyyy.",
+    link: "https://www.instagram.com/reel/DZAx2EUoNH3/",
+  },
+  {
+    title: "On Top of the World",
+    platform: "Instagram",
+    thumbnail: "/portfolio/braids_top_of_world.jpg",
+    description: "POV: you got new braids and you feel on top of the world.",
+    link: "https://www.instagram.com/reel/DZCuCw3oqE9/",
+  },
+
   // Add more items here
 ];
 
@@ -125,7 +196,11 @@ const platforms = ["All", "Instagram", "TikTok", "Reels"];
                       <span class="text-xs font-medium px-2 py-1 rounded-full bg-pink-500/20 text-pink-200">
                         {item.platform}
                       </span>
-                      <span class="text-xs text-gray-300">{item.metrics}</span>
+                      {item.metrics && (
+                        <span class="text-xs text-gray-300">
+                          {item.metrics}
+                        </span>
+                      )}
                     </div>
                     <h3 class="text-lg font-semibold mb-1">{item.title}</h3>
                     <p class="text-sm text-gray-200">{item.description}</p>
@@ -164,7 +239,7 @@ const platforms = ["All", "Instagram", "TikTok", "Reels"];
           () => {
             item.style.display = shouldShow ? "block" : "none";
           },
-          shouldShow ? 0 : 300
+          shouldShow ? 0 : 300,
         );
       });
     });

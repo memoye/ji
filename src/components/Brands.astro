@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import follyjaysLogo from "../assets/images/follyjays_wellness_and)Spa.jpeg";
+import youJaymharahLogo from "../assets/images/youJaymharah_trends.jpeg";
+import partnerLogo from "../assets/images/partner.jpeg";
+
+interface Brand {
+  name: string;
+  logo: ImageMetadata;
+}
+
+const brands: Brand[] = [
+  { name: "Follyjays Spa & Wellness", logo: follyjaysLogo },
+  { name: "You Jaymharah Trends", logo: youJaymharahLogo },
+  { name: "Brand Partner", logo: partnerLogo },
+];
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center space-y-4 mb-12" data-animate>
+      <h2
+        class="text-3xl font-bold tracking-tight text-balance bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"
+      >
+        Brands I've Worked With
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Trusted by brands to create content that connects.
+      </p>
+    </div>
+
+    <div
+      class="flex flex-wrap items-center justify-center gap-x-16 gap-y-10"
+    >
+      {
+        brands.map((brand) => (
+          <div
+            class="w-32 h-32 flex items-center justify-center rounded-full overflow-hidden bg-white shadow-sm grayscale hover:grayscale-0 transition-all duration-300"
+            data-animate
+          >
+            <Image
+              src={brand.logo}
+              alt={brand.name}
+              class="h-full w-full object-cover"
+              width={128}
+              height={128}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,9 +1,18 @@
 ---
 import { Image } from "astro:assets";
 
+type Category =
+  | "Beauty"
+  | "Fashion"
+  | "Lifestyle"
+  | "Faith"
+  | "Finance"
+  | "Technology";
+
 interface ContentItem {
   title: string;
   platform: "Instagram" | "TikTok" | "Reels";
+  category: Category;
   thumbnail: string;
   description: string;
   metrics?: string;
@@ -14,6 +23,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Fresh Braids, New Mood",
     platform: "Instagram",
+    category: "Beauty",
     thumbnail: "/portfolio/braids_mood.jpg",
     description:
       "Nobody talks enough about how getting new braids instantly changes your mood.",
@@ -22,6 +32,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Soft Glam Transition",
     platform: "Instagram",
+    category: "Beauty",
     thumbnail: "/portfolio/makeup_transition.jpg",
     description:
       "Wanted a quick makeup transition, ended up serving soft glam — no crumbs left.",
@@ -30,6 +41,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Hair Styling",
     platform: "TikTok",
+    category: "Beauty",
     thumbnail: "/portfolio/hair.png",
     description: "Week 4 of 8 weeks of styling Crotchet faux locs.",
     metrics: "500+ likes in 24h",
@@ -38,6 +50,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Braids Maintenance",
     platform: "Instagram",
+    category: "Beauty",
     thumbnail: "/portfolio/braids_maintenance.jpg",
     description:
       "Braids are cute, but maintenance is key — caring for your hair is just as important as styling it.",
@@ -46,6 +59,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Leg Day Grind",
     platform: "Instagram",
+    category: "Lifestyle",
     thumbnail: "/portfolio/leg_day.jpg",
     description:
       "Worth it! Leg day three times a week — what are you training legs for?",
@@ -54,6 +68,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Nail Artistry",
     platform: "TikTok",
+    category: "Beauty",
     thumbnail: "/portfolio/nails.avif",
     description: "This video might make you book a nail appointment ASAP",
     metrics: "500+ likes in 24h",
@@ -62,6 +77,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Self-Care Reset",
     platform: "Instagram",
+    category: "Lifestyle",
     thumbnail: "/portfolio/self_care_reset.jpg",
     description: "A quiet self-care moment to reset and recharge.",
     link: "https://www.instagram.com/reel/DXzEjtAo6N8/",
@@ -69,6 +85,7 @@ const portfolio: ContentItem[] = [
   {
     title: "The Summer Fashion Trend",
     platform: "Instagram",
+    category: "Fashion",
     thumbnail: "/portfolio/june.jpg",
     description: "This gorgeous dress is the perfect June dress",
     metrics: "10K+ views",
@@ -77,6 +94,7 @@ const portfolio: ContentItem[] = [
   {
     title: "The Summer Fashion Trend",
     platform: "Instagram",
+    category: "Fashion",
     thumbnail: "/portfolio/igpost.jpg",
     description: "...",
     metrics: "10K+ views",
@@ -85,6 +103,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Church Service",
     platform: "TikTok",
+    category: "Faith",
     thumbnail: "/portfolio/church.avif",
     description: "Who else can relate? Me right after church service. ...",
     metrics: "50+ likes in 24h",
@@ -93,6 +112,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Sunday Transition",
     platform: "Instagram",
+    category: "Fashion",
     thumbnail: "/portfolio/rich_aunt.jpg",
     description:
       "It's Rich Auntie Season and I'm basking in it Bubu gown: @youjaymharah_trends",
@@ -102,6 +122,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Little Luxuries",
     platform: "Instagram",
+    category: "Lifestyle",
     thumbnail: "/portfolio/little_luxuries.jpg",
     description:
       "Sometimes it's okay to buy something simply because it makes your life a little better.",
@@ -110,6 +131,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Pack My Gym Bag",
     platform: "Instagram",
+    category: "Lifestyle",
     thumbnail: "/portfolio/gym_bag.jpg",
     description:
       "My gym bag essentials — from grip gloves and headphones to my gym journal and water bottle.",
@@ -118,6 +140,7 @@ const portfolio: ContentItem[] = [
   {
     title: "Thanksgiving Sunday",
     platform: "Instagram",
+    category: "Faith",
     thumbnail: "/portfolio/thanksgiving_sunday.jpg",
     description:
       "I will dance and rejoice as I enter the Lord's house. It's Thanksgiving Sundayyyyy.",
@@ -126,12 +149,23 @@ const portfolio: ContentItem[] = [
   {
     title: "On Top of the World",
     platform: "Instagram",
+    category: "Beauty",
     thumbnail: "/portfolio/braids_top_of_world.jpg",
     description: "POV: you got new braids and you feel on top of the world.",
     link: "https://www.instagram.com/reel/DZCuCw3oqE9/",
   },
 
   // Add more items here
+];
+
+const categories: (Category | "All")[] = [
+  "All",
+  "Beauty",
+  "Fashion",
+  "Lifestyle",
+  "Faith",
+  "Finance",
+  "Technology",
 ];
 
 const platforms = ["All", "Instagram", "TikTok", "Reels"];
@@ -151,15 +185,34 @@ const platforms = ["All", "Instagram", "TikTok", "Reels"];
       </p>
     </div>
 
-    <!-- Filter Buttons -->
+    <!-- Category Filter -->
+    <div
+      class="flex justify-center gap-2 mb-4 flex-wrap"
+      id="portfolio-category-filters"
+    >
+      {
+        categories.map((category) => (
+          <button
+            class="px-4 py-2 text-sm font-medium rounded-full transition-all data-[active=true]:bg-gradient-to-r data-[active=true]:from-pink-500 data-[active=true]:to-purple-500 data-[active=true]:text-white bg-gray-100 text-gray-700 hover:bg-gray-200"
+            data-category={category}
+            data-active={category === "All"}
+            data-animate
+          >
+            {category}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Platform Filter -->
     <div
       class="flex justify-center gap-2 mb-12 flex-wrap"
-      id="portfolio-filters"
+      id="portfolio-platform-filters"
     >
       {
         platforms.map((platform) => (
           <button
-            class="px-4 py-2 text-sm font-medium rounded-full transition-all data-[active=true]:bg-gradient-to-r data-[active=true]:from-pink-500 data-[active=true]:to-purple-500 data-[active=true]:text-white bg-gray-100 text-gray-700 hover:bg-gray-200"
+            class="px-3 py-1 text-xs font-medium rounded-full border transition-all data-[active=true]:bg-gray-900 data-[active=true]:text-white data-[active=true]:border-gray-900 bg-white text-gray-500 border-gray-200 hover:border-gray-400"
             data-platform={platform}
             data-active={platform === "All"}
             data-animate
@@ -169,6 +222,14 @@ const platforms = ["All", "Instagram", "TikTok", "Reels"];
         ))
       }
     </div>
+
+    <!-- Empty state -->
+    <p
+      id="portfolio-empty"
+      class="hidden text-center text-gray-500 mb-12"
+    >
+      No content in this category yet — check back soon!
+    </p>
 
     <!-- Portfolio Grid -->
     <div
@@ -180,6 +241,7 @@ const platforms = ["All", "Instagram", "TikTok", "Reels"];
           <div
             class="group relative overflow-hidden rounded-xl bg-gray-100 portfolio-item"
             data-platform={item.platform}
+            data-category={item.category}
           >
             <a href={item.link} target="_blank" rel="noopener noreferrer">
               <figure class="aspect-[4/5] relative">
@@ -192,7 +254,10 @@ const platforms = ["All", "Instagram", "TikTok", "Reels"];
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent md:opacity-0 md:group-hover:opacity-100 transition-all duration-300">
                   <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <div class="flex items-center gap-2 mb-2">
+                    <div class="flex items-center gap-2 mb-2 flex-wrap">
+                      <span class="text-xs font-medium px-2 py-1 rounded-full bg-purple-500/20 text-purple-200">
+                        {item.category}
+                      </span>
                       <span class="text-xs font-medium px-2 py-1 rounded-full bg-pink-500/20 text-pink-200">
                         {item.platform}
                       </span>
@@ -216,32 +281,59 @@ const platforms = ["All", "Instagram", "TikTok", "Reels"];
 </section>
 
 <script>
-  const filterButtons = document.querySelectorAll("#portfolio-filters button");
+  const categoryButtons = document.querySelectorAll(
+    "#portfolio-category-filters button",
+  );
+  const platformButtons = document.querySelectorAll(
+    "#portfolio-platform-filters button",
+  );
   const portfolioItems =
     document.querySelectorAll<HTMLElement>(".portfolio-item");
+  const emptyState = document.getElementById("portfolio-empty");
 
-  filterButtons.forEach((button) => {
+  let activeCategory = "All";
+  let activePlatform = "All";
+
+  function applyFilters() {
+    let visibleCount = 0;
+
+    portfolioItems.forEach((item) => {
+      const itemCategory = item.getAttribute("data-category");
+      const itemPlatform = item.getAttribute("data-platform");
+      const shouldShow =
+        (activeCategory === "All" || activeCategory === itemCategory) &&
+        (activePlatform === "All" || activePlatform === itemPlatform);
+
+      if (shouldShow) visibleCount++;
+
+      item.style.opacity = shouldShow ? "1" : "0";
+      item.style.transform = shouldShow ? "scale(1)" : "scale(0.8)";
+      setTimeout(
+        () => {
+          item.style.display = shouldShow ? "block" : "none";
+        },
+        shouldShow ? 0 : 300,
+      );
+    });
+
+    emptyState?.classList.toggle("hidden", visibleCount > 0);
+  }
+
+  categoryButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      const platform = button.getAttribute("data-platform");
-
-      // Update active state of buttons
-      filterButtons.forEach((btn) => btn.setAttribute("data-active", "false"));
+      activeCategory = button.getAttribute("data-category") ?? "All";
+      categoryButtons.forEach((btn) => btn.setAttribute("data-active", "false"));
       button.setAttribute("data-active", "true");
+      applyFilters();
+    });
+  });
 
-      // Filter items
-      portfolioItems.forEach((item) => {
-        const itemPlatform = item.getAttribute("data-platform");
-        const shouldShow = platform === "All" || platform === itemPlatform;
-
-        item.style.opacity = shouldShow ? "1" : "0";
-        item.style.transform = shouldShow ? "scale(1)" : "scale(0.8)";
-        setTimeout(
-          () => {
-            item.style.display = shouldShow ? "block" : "none";
-          },
-          shouldShow ? 0 : 300,
-        );
-      });
+  platformButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activePlatform = button.getAttribute("data-platform") ?? "All";
+      platformButtons.forEach((btn) => btn.setAttribute("data-active", "false"));
+      button.setAttribute("data-active", "true");
+      applyFilters();
     });
   });
 </script>
